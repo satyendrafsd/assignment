@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        .container{
+            width: 60%;
+            margin: 0 auto;
+            margin-top:20px
+        }
+        input{
+            border:1px solid wheat;
+            width:50%;
+            padding:10px 5px;
+            margin:10px;
+        }
+        button{
+            margin:10px;
+            border:0.5px solid wheat;
+            padding:8px 16px;
+            background-color: white;
+            color:black;
+        }
+        button:hover{
+            background-color: rgb(194, 194, 194);
+            transition: background ease-in-out 0.4s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="text" id="personName" placeholder="Enter Name"><br>
+       
+        <button onclick="getDesignation()">Get Person Info</button>
+        <h2 id="showPersonData"></h2>
+        <br>
+        <br>
+        <hr>
+        <br><br><br>
+        <p>Print all palindrome between 1 to 100</p>
+        
+        <button id="palindrome">Print Palindrome</button>
+        <h2 id="showPalindrome"></h2>
+    </div>
+
+    <script>
+        // perosn's data
+        let persons = [
+            {
+                name:'Alex',
+                designaion:'Developer'
+            },
+            {
+                name:'John',
+                designaion:'Artist'
+            },
+            {
+                name:'Strek',
+                designaion:'Singer'
+            },
+            {
+                name:'Smith',
+                designaion:'Actor'
+            },
+
+        ]
+        // button click 
+        function getDesignation(){
+            let personName = document.querySelector('#personName').value.trim();
+            if(personName===''){
+                alert('Please Enter name');
+            }
+            else{
+                document.getElementById("showPersonData").innerHTML = showDesignation(personName);
+                
+            }
+            
+        }
+
+        // return person data 
+        function showDesignation(personName){
+            let obj = {};
+            for(let ele of persons){
+                if(ele.name.toLocaleLowerCase() === personName.toLocaleLowerCase()){
+                    obj = ele;
+                    break;
+                }
+            }
+            if(obj.name){
+                return `${obj.name} is a ${obj.designaion}`;
+            }
+            else{
+                return `${personName} is not in database`;
+            }
+        }
+
+        //assignment 2
+
+        let isPalindrome = (n) =>{
+            let temp = n;
+            let rev = 0;
+            while(temp){
+                rev = rev*10+temp%10;
+                temp = parseInt(temp/10);
+            }
+            return n === rev;
+        }
+        document.getElementById('palindrome').addEventListener('click', ()=>{
+            let ans = '';
+            for(let i=0;i<=50;i++){
+                if(isPalindrome(i)){
+                    ans += i + '<br>'
+                }
+            }
+            document.getElementById('showPalindrome').innerHTML = ans;
+        })
+
+
+    </script>
+</body>
+</html>
